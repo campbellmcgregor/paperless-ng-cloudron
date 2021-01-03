@@ -1,0 +1,25 @@
+{
+  "id": "com.paperlessng.cloudronapp",
+  "title": "Paperless NG",
+  "author": "Paperless Team",
+  "description": "Paperless NG application.",
+  "tagline": "Paperless",
+  "version": "0.1.0",
+  "healthCheckPath": "/",
+  "httpPort": 8000,
+  "addons": {
+    "localstorage": {},
+    "redis":{},
+    "postgresql":{}
+  },
+  "memoryLimit": 524288000,
+  "manifestVersion": 2,
+  "website": "https://paperless.io",
+  "contactEmail": "support@cloudron.io",
+  "icon": "",
+  "tags": [ ],
+  "mediaLinks": [
+  ],
+  "postInstallMessage":"file://POSTINSTALL.md",
+  "documentationUrl":"https://cloudron.io"
+}
