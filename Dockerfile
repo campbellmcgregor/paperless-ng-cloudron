@@ -17,5 +17,6 @@ ENV LC_ALL=C.UTF-8
 RUN python3 ./src/manage.py collectstatic --clear --no-input
 COPY policy.xml /etc/ImageMagick-6
 RUN ln -s /app/data/media /app/code/media && ln -s /app/data/data /app/code/data && ln -s /app/data/consume /app/code/consume
+COPY paperless.conf /app/code/paperless.conf
 
 EXPOSE 8000
