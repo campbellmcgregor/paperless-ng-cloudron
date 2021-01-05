@@ -5,7 +5,7 @@ Requires=redis.service
 [Service]
 User=paperless
 Group=paperless
-WorkingDirectory=/opt/paperless/src
+WorkingDirectory=/app/code/src
 ExecStart=python3 manage.py document_consumer
 
 [Install]
