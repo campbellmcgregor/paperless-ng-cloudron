@@ -23,4 +23,6 @@ if ! [ -f /app/data/.initialized ]; then
 
 fi
 
-exec "$@"
+exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-consumer.service --nodaemon -i PaperlessConsumer
+exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-scheduler.service --nodaemon -i PaperlessScheduler
+exec /user/bin/supervisod --configuration /etc/supervisor/conf.d/paperless-webserver.service --nodaemon -i PaperlessWeb
