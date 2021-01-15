@@ -2,11 +2,10 @@
 Description=Paperless webserver
 After=network.target
 Wants=network.target
-Requires=redis.service
 
 [Service]
-User=paperless
-Group=paperless
+User=cloudron
+Group=cloudron
 WorkingDirectory=/app/code/src
 ExecStart=gunicorn paperless.wsgi -w 2 -b 0.0.0.0:8000
 
