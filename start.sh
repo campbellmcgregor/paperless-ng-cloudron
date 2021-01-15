@@ -14,7 +14,7 @@ if ! [ -f /app/data/.initialized ]; then
 	  sed -i "s/%PAPERLESS_CONSUME_DB_USER%/${CLOUDRON_POSTGRESQL_USERNAME}/g" /app/data/paperless.conf
           sed -i "s/%PAPERLESS_CONSUME_DB_PASS%/${CLOUDRON_POSTGRESQL_PASSWORD}/g" /app/data/paperless.conf
 
-	  /app/code/src/manage.py migrate
+	  python3 /app/code/src/manage.py migrate
 	  $SECRET= dd if=/dev/urandom bs=1 count=1024 2>/dev/null | sha1sum | awk '{ print $1 }'
 	  sed -i "s/%PAPERLESS_CONSUME_SECRET%/${SECRET}/g" /app/data/paperless.conf
 
@@ -25,4 +25,4 @@ fi
 
 exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-consumer.service --nodaemon -i PaperlessConsumer
 exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-scheduler.service --nodaemon -i PaperlessScheduler
-exec /usr/bin/supervisod --configuration /etc/supervisor/conf.d/paperless-webserver.service --nodaemon -i PaperlessWeb
+exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-webserver.service --nodaemon -i PaperlessWeb

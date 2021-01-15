@@ -20,6 +20,7 @@ RUN ln -s /app/data/media /app/code/media && ln -s /app/data/data /app/code/data
 COPY paperless.conf /app/code/paperless.conf
 ADD supervisor/* /etc/supervisor/conf.d/
 ADD start.sh /app/code/start.sh
+RUN chmod +x /app/code/start.sh 
 
 CMD [ "/app/code/start.sh" ]
 EXPOSE 8000
