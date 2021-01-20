@@ -22,7 +22,8 @@ if ! [ -f /app/data/.initialized ]; then
 
 
 fi
+exec sudo -HEu cloudron python3 "/app/code/src/manage.py" "runserver" "--insecure" "0.0.0.0:8000" 
 
-exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-consumer.service --nodaemon -i PaperlessConsumer
-exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-scheduler.service --nodaemon -i PaperlessScheduler
-exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-webserver.service --nodaemon -i PaperlessWeb
+#exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-consumer.service --nodaemon -i PaperlessConsumer
+#exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-scheduler.service --nodaemon -i PaperlessScheduler
+#exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-webserver.service --nodaemon -i PaperlessWeb
