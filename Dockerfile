@@ -8,7 +8,8 @@ WORKDIR /app/code
 RUN wget https://github.com/jonaswinkler/paperless-ng/releases/download/ng-0.9.11/paperless-ng-0.9.11.tar.xz && \
     tar -xf paperless-ng-0.9.11.tar.xz && \
     mv paperless-ng/* . && \
-    rm -rf paperless-ng paperles-ng-0.9.11.tar.xz
+    rm -rf paperless-ng && \
+    rm -f paperles-ng-0.9.11.tar.xz
 RUN python3 -m pip install --upgrade pip
 RUN pip3 install pybind11 && \
     pip3 install -r requirements.txt
@@ -17,10 +18,10 @@ ENV LC_ALL=C.UTF-8
 RUN python3 ./src/manage.py collectstatic --clear --no-input
 COPY policy.xml /etc/ImageMagick-6
 RUN ln -s /app/data/media /app/code/media && ln -s /app/data/data /app/code/data && ln -s /app/data/consume /app/code/consume
-COPY paperless.conf /app/code/paperless.conf
+COPY paperless.conf.setup /app/code/paperless.conf.setup
 ADD supervisor/* /etc/supervisor/conf.d/
-RUN ln -sf /run/gitlab/supervisord.log /var/log/supervisor/supervisord.log
-ADD start.sh /app/code/start.sh
+RUN ln -sf /run/paperless/supervisord.log /var/log/supervisor/supervisord.log && ln -sf /app/data/paperless.conf /app/code/paperless.conf
+ADD user.db.json start.sh /app/code/
 RUN chmod +x /app/code/start.sh 
 
 CMD [ "/app/code/start.sh" ]

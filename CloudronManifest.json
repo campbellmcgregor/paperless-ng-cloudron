@@ -9,7 +9,7 @@
   "httpPort": 8000,
   "addons": {
     "localstorage": {},
-    "redis":{},
+    "redis":{ "noPassword": true},
     "postgresql":{}
   },
   "memoryLimit": 524288000,
