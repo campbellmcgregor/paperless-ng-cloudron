@@ -1,12 +1,12 @@
-[Unit]
-Description=Paperless consumer
-Requires=redis.service
+[program:paperless-consumer.service]
+priority=10
+directory=/app/code/src
+command=python3 manage.py document_consumer
+user=cloudron
+autostart=true
+autorestart=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
 
-[Service]
-User=paperless
-Group=paperless
-WorkingDirectory=/app/code/src
-ExecStart=python3 manage.py document_consumer
-
-[Install]
-WantedBy=multi-user.target

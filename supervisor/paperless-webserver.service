@@ -1,13 +1,11 @@
-[Unit]
-Description=Paperless webserver
-After=network.target
-Wants=network.target
-
-[Service]
-User=cloudron
-Group=cloudron
-WorkingDirectory=/app/code/src
-ExecStart=gunicorn paperless.wsgi -w 2 -b 0.0.0.0:8000
-
-[Install]
-WantedBy=multi-user.target
+[program:paperless-consumer.service]
+priority=10
+directory=/app/code/src
+command=gunicorn /app/data/paperless.wsgi -w 2 -b 0.0.0.0:8000
+user=cloudron
+autostart=true
+autorestart=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0

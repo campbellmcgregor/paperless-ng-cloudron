@@ -17,13 +17,11 @@ if ! [ -f /app/data/.initialized ]; then
 	  python3 /app/code/src/manage.py migrate
 	  $SECRET= dd if=/dev/urandom bs=1 count=1024 2>/dev/null | sha1sum | awk '{ print $1 }'
 	  sed -i "s/%PAPERLESS_CONSUME_SECRET%/${SECRET}/g" /app/data/paperless.conf
-
 	  touch /app/data/.initialized
 
 
 fi
-exec sudo -HEu cloudron python3 "/app/code/src/manage.py" "runserver" "--insecure" "0.0.0.0:8000" 
-
-#exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-consumer.service --nodaemon -i PaperlessConsumer
-#exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-scheduler.service --nodaemon -i PaperlessScheduler
-#exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-webserver.service --nodaemon -i PaperlessWeb
+echo "Starting supervisor"
+exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-consumer.service --nodaemon -i PaperlessConsumer
+exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-scheduler.service --nodaemon -i PaperlessScheduler
+exec /usr/bin/supervisord --configuration /etc/supervisor/conf.d/paperless-webserver.service --nodaemon -i PaperlessWebserver
