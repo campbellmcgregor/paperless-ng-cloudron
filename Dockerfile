@@ -2,7 +2,7 @@ FROM cloudron/base:2.0.0@sha256:f9fea80513aa7c92fe2e7bf3978b54c8ac5222f47a9a32a7
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y fonts-liberation optipng gnupg libpoppler-cpp-dev libmagic-dev unpaper ghostscript icc-profiles-free qpdf liblept5 pngquant tesseract-ocr python3-setuptools python3-wheel
-RUN mkdir -p /app/code /app/data/media /app/data/data /app/data/consume
+RUN mkdir -p /app/code /app/data/media/documents/originals /app/data/media/documents/thumbnails /app/data/data /app/data/consume
 RUN chown -R cloudron:cloudron /app
 WORKDIR /app/code
 RUN wget https://github.com/jonaswinkler/paperless-ng/releases/download/ng-0.9.11/paperless-ng-0.9.11.tar.xz && \
@@ -21,7 +21,7 @@ RUN ln -s /app/data/media /app/code/media && ln -s /app/data/data /app/code/data
 COPY paperless.conf.setup /app/code/paperless.conf.setup
 ADD supervisor/* /etc/supervisor/conf.d/
 RUN ln -sf /run/paperless/supervisord.log /var/log/supervisor/supervisord.log && ln -sf /app/data/paperless.conf /app/code/paperless.conf
-ADD user.db.json start.sh /app/code/
+ADD start.sh /app/code/
 RUN chmod +x /app/code/start.sh 
 
 CMD [ "/app/code/start.sh" ]

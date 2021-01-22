@@ -15,6 +15,11 @@ if ! [ -f /app/data/.initialized ]; then
 	  sed -i "s/%PAPERLESS_CONSUME_DB_USER%/${CLOUDRON_POSTGRESQL_USERNAME}/g" /app/data/paperless.conf
           sed -i "s/%PAPERLESS_CONSUME_DB_PASS%/${CLOUDRON_POSTGRESQL_PASSWORD}/g" /app/data/paperless.conf
 
+#	  sed -i "s/%PAPERLESS_CONSUME_MAIL_HOST%/${MAIL_IMAP_SERVER}/g" /app/data/paperless.conf
+#	  sed -i "s/%PAPERLESS_CONSUME_MAIL_PORT%/${MAIL_IMAP_PORT}/g" /app/data/paperless.conf
+#	  sed -i "s/%PAPERLESS_CONSUME_MAIL_USER%/${MAIL_IMAP_USERNAME}/g" /app/data/paperless.conf
+#	  sed -i "s/%PAPERLESS_CONSUME_MAIL_PASS%/${MAIL_IMAP_PASSWORD}/g" /app/data/paperless.conf
+
 	  python3 /app/code/src/manage.py migrate
 	  SECRET=`date +%s|sha256sum|base64|head -c 32`
 	  sed -i "s/%PAPERLESS_CONSUME_SECRET%/${SECRET}/g" /app/data/paperless.conf
@@ -23,7 +28,9 @@ if ! [ -f /app/data/.initialized ]; then
 
 fi
 echo "Process migrations"
-python3 /app/code/src/manage.py migrate
+cd /app/code/src && python3 manage.py migrate
+echo "=> Ensure permissions"
+chown -Rh cloudron:cloudron /app/data
 echo "Starting supervisor"
 mkdir -p /run/paperless && touch /run/paperless/supervisord.log
 exec /usr/bin/supervisord --configuration /etc/supervisor/supervisord.conf --nodaemon -i Paperless

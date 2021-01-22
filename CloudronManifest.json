@@ -10,13 +10,14 @@
   "addons": {
     "localstorage": {},
     "redis":{ "noPassword": true},
-    "postgresql":{}
+    "postgresql":{},
+    "recvmail": {}
   },
   "memoryLimit": 524288000,
   "manifestVersion": 2,
   "website": "https://paperless.io",
   "contactEmail": "support@cloudron.io",
-  "icon": "",
+  "icon": "logo.png",
   "tags": [ ],
   "mediaLinks": [
   ],
