@@ -5,11 +5,11 @@ RUN apt-get install -y fonts-liberation optipng gnupg libpoppler-cpp-dev libmagi
 RUN mkdir -p /app/code /app/data/media/documents/originals /app/data/media/documents/thumbnails /app/data/data /app/data/consume
 RUN chown -R cloudron:cloudron /app
 WORKDIR /app/code
-RUN wget https://github.com/jonaswinkler/paperless-ng/releases/download/ng-0.9.11/paperless-ng-0.9.11.tar.xz && \
-    tar -xf paperless-ng-0.9.11.tar.xz && \
+RUN wget https://github.com/jonaswinkler/paperless-ng/releases/download/ng-1.0.0/paperless-ng-1.0.0.tar.xz && \
+    tar -xf paperless-ng-1.0.0.tar.xz && \
     mv paperless-ng/* . && \
     rm -rf paperless-ng && \
-    rm -f paperles-ng-0.9.11.tar.xz
+    rm -f paperles-ng-1.0.0.tar.xz
 RUN python3 -m pip install --upgrade pip
 RUN pip3 install pybind11 && \
     pip3 install -r requirements.txt
