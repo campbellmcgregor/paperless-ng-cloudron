@@ -11,7 +11,13 @@
     "localstorage": {},
     "redis":{ "noPassword": true},
     "postgresql":{},
-    "recvmail": {}
+    "recvmail": {},
+    "scheduler": {
+        "consume": {
+	     "schedule": "*/1 * * * *",
+	     "command": "cd /app/code/src/ && python3 manage.py document_consumer"
+	}
+    }
   },
   "memoryLimit": 524288000,
   "manifestVersion": 2,
