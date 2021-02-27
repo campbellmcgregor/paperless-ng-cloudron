@@ -8,10 +8,16 @@
   "healthCheckPath": "/",
   "httpPort": 8000,
   "addons": {
-    "localstorage": {},
+    "localstorage": {
+      "ftp": {
+        "uid": 1000,
+        "uname": "cloudron"
+      }
+    },
     "redis":{ "noPassword": true},
     "postgresql":{},
     "recvmail": {},
+    "proxyAuth": {},
     "scheduler": {
         "consume": {
 	     "schedule": "*/1 * * * *",
