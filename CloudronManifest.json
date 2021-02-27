@@ -4,7 +4,7 @@
   "author": "Paperless Team",
   "description": "Paperless NG application.",
   "tagline": "Paperless",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "healthCheckPath": "/",
   "httpPort": 8000,
   "addons": {
